@@ -24,7 +24,7 @@ const isProd = env.MODE === 'prod';
 
 const publicPath = env.PUBLIC_PATH || './';
 
-const filePath = fg.sync(resolve('../modules/**/route.js'), {
+const filePath = fg.sync(resolve('../modules/**/router.js'), {
   deep: 2,
   onlyFiles: true,
 });
