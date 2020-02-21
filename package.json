@@ -30,12 +30,12 @@
 		"deploy": "now --npm --public",
 		"stdver": "standard-version -m '[skip ci] chore(release): v%s'",
 		"release": "gren release --override",
-		"fix": "eslint --fix  modules/**/*.js  modules/**/*.vue --quiet",
+		"fix": "eslint --fix  modules/**/*.ts  modules/**/*.vue --quiet",
 		"lint": "lint-staged",
 		"commitmsg": "commitlint -E GIT_PARAMS",
 		"eslint-check": "eslint --print-config . | eslint-config-prettier-check",
 		"commit": "npx git-cz",
-		"build:template": "node ./bin/build-template.js",
+		"build:template": "node ./bin/build-template.ts",
 		"prepack": "npm run build:template"
 	},
 	"devDependencies": {
@@ -85,17 +85,28 @@
 		}
 	},
 	"lint-staged": {
-		"*.js": [
+		"*.ts": [
 			"prettier --write",
-			"eslint --fix modules/**/*.js modules/**/*.vue --quiet",
 			"git add"
 		],
 		"*.vue": [
 			"prettier --write",
 			"stylelint --fix",
-			"eslint --fix modules/**/*.js modules/**/*.vue --quiet",
 			"git add"
 		]
 	},
-	"gitHead": "b95c3ab64ab380d6986dcab35328394fc7b971f6"
+	"gitHead": "b95c3ab64ab380d6986dcab35328394fc7b971f6",
+	"dependencies": {
+		"@babel/plugin-transform-modules-commonjs": "^7.8.3",
+		"@nuxt/types": "^0.6.2",
+		"@nuxt/typescript": "^2.8.1",
+		"@nuxt/typescript-build": "^0.5.7",
+		"@nuxt/typescript-runtime": "^0.3.9",
+		"@types/node": "^13.7.1",
+		"@types/webpack-env": "^1.15.1",
+		"ts-loader": "^6.2.1",
+		"ts-node": "^8.6.2",
+		"vue-property-decorator": "^8.4.0",
+		"vuex-class": "^0.3.2"
+	}
 }
