@@ -2,8 +2,8 @@
  * @Description: vuex store
  * @Author: barret
  * @Date: 2019-08-13 17:18:05
- * @LastEditTime: 2019-08-13 17:19:11
- * @LastEditors: barret
+ * @LastEditTime: 2020-02-21 17:12:01
+ * @LastEditors: Please set LastEditors
  */
 import cookie from 'js-cookie';
 import cookieKeys from '@/const/cookie-keys';
@@ -110,7 +110,7 @@ export const actions = {
     const {payload} = await getProductList({
       status: 1,
     });
-    const productList = payload;
+    const productList = payload || [];
     const [product] = productList.filter(item => item.productName === meta.spaName);
     if (!product) return;
     const {id: centerId, icon} = product;

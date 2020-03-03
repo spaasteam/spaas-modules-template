@@ -42,37 +42,34 @@
   </div>
 </template>
 
-<script>
-import clipboard from '@/utils/clipboard';
+<script lang="ts">
+import {Tabs, TabPane} from '@femessage/element-ui';
+import {Vue, Component, Emit} from 'vue-property-decorator';
+import clipboard from '~/utils/clipboard';
 import svgIcons from './svg-icons';
 import elementIcons from './element-icons';
-import {Tabs, TabPane} from '@femessage/element-ui';
 
-export default {
-  name: 'Icons',
-  data() {
-    return {
-      svgIcons,
-      elementIcons,
-    };
-  },
-  components: {
-    [Tabs.name]: Tabs,
-    [TabPane.name]: TabPane,
-  },
-  methods: {
-    generateIconCode(symbol) {
-      return `<svg-icon icon-class="${symbol}" />`;
-    },
-    generateElementIconCode(symbol) {
-      return `<i class="el-icon-${symbol}" />`;
-    },
-    handleClipboard(text, event) {
-      console.error(event);
-      clipboard(text, event);
-    },
-  },
-};
+@Component({
+  [Tabs.name]: Tabs,
+  [TabPane.name]: TabPane,
+})
+export default class Icons extends Vue {
+  svgIcons = svgIcons;
+  elementIcons = elementIcons;
+  @Emit()
+  generateIconCode(symbol: string) {
+    return `<svg-icon icon-class="${symbol}" />`;
+  }
+  @Emit()
+  generateElementIconCode(symbol: string) {
+    return `<i class="el-icon-${symbol}" />`;
+  }
+  @Emit()
+  handleClipboard(text: any, event: any) {
+    console.error(event);
+    clipboard(text, event);
+  }
+}
 </script>
 
 <style lang="less" scoped>

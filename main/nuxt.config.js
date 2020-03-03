@@ -2,11 +2,11 @@
  * @Description: nuxt 配置文件
  * @Author: barret
  * @Date: 2019-08-10 07:57:24
- * @LastEditTime: 2019-08-22 21:08:07
- * @LastEditors: barret
+ * @LastEditTime: 2020-02-19 11:51:03
+ * @LastEditors: Please set LastEditors
  */
 require('dotenv').config();
-const proxyConfig = require('../proxy.config');
+const proxyConfig = require('../proxy.config.ts');
 const path = require('path');
 // 添加扩展路由
 const fg = require('fast-glob');
@@ -30,6 +30,7 @@ const filePath = fg.sync(resolve('../modules/**/router.js'), {
 });
 
 const routes = filePath.reduce((pre, cur) => {
+  // eslint-disable-next-line global-require
   const file = require(cur).default;
   return pre.concat(file);
 }, []);
@@ -79,7 +80,7 @@ const nuxtConfig = {
     /*
      ** Run ESLint on save
      */
-    extend(config, {isDev, isClient}) {
+    extend(config) {
       config.externals = {
         vue: 'Vue',
         '@femessage/element-ui': 'ELEMENT',
@@ -87,28 +88,38 @@ const nuxtConfig = {
       };
       config.module.rules = config.module.rules.filter(item => !item.test.test('.svg'));
 
-      config.module.rules.push({
-        test: /\.svg$/,
-        loader: 'svg-sprite-loader',
-        include: [resolve('./icons')],
-        options: {
-          symbolId: 'icon-[name]',
-        },
-      });
-
-      config.module.rules.push({
-        test: /\.(png|jpe?g|gif|svg)$/,
-        exclude: [resolve('./icons')],
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10000, // 1K limit
-              name: 'img/[name].[hash:8].[ext]',
-            },
+      config.module.rules.push(
+        {
+          test: /\.svg$/,
+          loader: 'svg-sprite-loader',
+          include: [resolve('./icons')],
+          options: {
+            symbolId: 'icon-[name]',
           },
-        ],
-      });
+        },
+        {
+          test: /\.ts$/,
+          exclude: [/node_modules/, /vendor/, /\.nuxt/],
+          loader: 'ts-loader',
+          options: {
+            appendTsSuffixTo: [/\.vue$/],
+            transpileOnly: true,
+          },
+        },
+        {
+          test: /\.(png|jpe?g|gif|svg)$/,
+          exclude: [resolve('./icons')],
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 10000, // 1K limit
+                name: 'img/[name].[hash:8].[ext]',
+              },
+            },
+          ],
+        },
+      );
 
       // Run ESLint on save
       // if (isDev && isClient) {
@@ -219,6 +230,7 @@ const nuxtConfig = {
       },
     ],
   ],
+  buildModules: ['@nuxt/typescript-build'],
   axios,
 };
 
