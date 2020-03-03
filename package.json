@@ -38,20 +38,35 @@
 		"build:template": "node ./bin/build-template.ts",
 		"prepack": "npm run build:template"
 	},
-	"devDependencies": {
-		"@commitlint/cli": "^8.0.0",
-		"@commitlint/config-conventional": "^8.0.0",
+	"dependencies": {
 		"@femessage/el-data-table": "^1.15.1",
 		"@femessage/el-form-renderer": "^1.12.1",
 		"@nuxtjs/axios": "^5.5.4",
+		"clipboard": "^2.0.4",
+		"dayjs": "^1.7.4",
+		"js-cookie": "^2.2.0",
+		"nuxt": "^2.8.1",
+		"path-to-regexp": "^3.0.0",
+		"resize-observer-polyfill": "^1.5.0",
+		"vue-property-decorator": "^8.4.0",
+		"vuex-class": "^0.3.2"
+	},
+	"devDependencies": {
+		"@babel/plugin-transform-modules-commonjs": "^7.8.3",
+		"@commitlint/cli": "^8.0.0",
+		"@commitlint/config-conventional": "^8.0.0",
 		"@nuxtjs/dotenv": "^1.3.0",
 		"@nuxtjs/style-resources": "^0.1.2",
+		"@nuxt/types": "^0.6.2",
+		"@nuxt/typescript": "^2.8.1",
+		"@nuxt/typescript-build": "^0.5.7",
+		"@nuxt/typescript-runtime": "^0.3.9",
+		"@types/node": "^13.7.1",
+		"@types/webpack-env": "^1.15.1",
 		"@vue/eslint-config-airbnb": "^4.0.0",
 		"babel-eslint": "^10.0.1",
 		"babel-plugin-component": "^1.1.0",
-		"clipboard": "^2.0.4",
 		"cross-env": "^5.1.3",
-		"dayjs": "^1.7.4",
 		"eslint": "^5.15.1",
 		"eslint-config-prettier": "^4.3.0",
 		"eslint-config-spaas": "^0.0.9",
@@ -62,20 +77,18 @@
 		"git-cz": "^3.2.1",
 		"github-release-notes": "^0.17.0",
 		"husky": "^1.3.1",
-		"js-cookie": "^2.2.0",
 		"less": "^3.9.0",
 		"less-loader": "^4.1.0",
 		"lint-staged": "^8.1.0",
-		"nuxt": "^2.8.1",
-		"path-to-regexp": "^3.0.0",
 		"prettier": "^1.16.0",
 		"prettier-eslint-cli": "^4.7.1",
-		"resize-observer-polyfill": "^1.5.0",
 		"standard-version": "^6.0.1",
 		"stylelint": "^9.10.0",
 		"stylelint-config-prettier": "^5.2.0",
 		"stylelint-config-standard": "^18.2.0",
-		"svg-sprite-loader": "^4.1.6"
+		"svg-sprite-loader": "^4.1.6",
+		"ts-loader": "^6.2.1",
+		"ts-node": "^8.6.2"
 	},
 	"husky": {
 		"hooks": {
@@ -94,19 +107,5 @@
 			"stylelint --fix",
 			"git add"
 		]
-	},
-	"gitHead": "b95c3ab64ab380d6986dcab35328394fc7b971f6",
-	"dependencies": {
-		"@babel/plugin-transform-modules-commonjs": "^7.8.3",
-		"@nuxt/types": "^0.6.2",
-		"@nuxt/typescript": "^2.8.1",
-		"@nuxt/typescript-build": "^0.5.7",
-		"@nuxt/typescript-runtime": "^0.3.9",
-		"@types/node": "^13.7.1",
-		"@types/webpack-env": "^1.15.1",
-		"ts-loader": "^6.2.1",
-		"ts-node": "^8.6.2",
-		"vue-property-decorator": "^8.4.0",
-		"vuex-class": "^0.3.2"
 	}
 }
