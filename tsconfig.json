@@ -9,16 +9,23 @@
           "es5",
           "es6",
           "es7",
+          "es2015",
+          "es2016",
           "dom"
         ],
         "esModuleInterop": true,
-        "allowJs": true,
+        "allowJs": false, //编译时，允许有 js 文件
         "sourceMap": true,
+        "diagnostics": true,//是否显示诊断信息
         "strict": true,
         "noEmit": true,
+        "noFallthroughCasesInSwitch": true, //switch 语句中，每个 case 都要有 break
         "baseUrl": "./main",
         "experimentalDecorators":true,
-        "noImplicitAny": false,
+        "noImplicitAny": false, //不允许隐式 any
+        "noUnusedLocals": true, //未使用的本地变量将报错
+        "noUnusedParameters": true, //未使用的参数将报错
+        "pretty": true,
         "paths": {
           "~/*": [
             "./*"
@@ -30,7 +37,7 @@
           "webpack-env",
           "mocha",
           "chai"
-        ]
+        ],
       },
       "exclude": [
         "node_modules"

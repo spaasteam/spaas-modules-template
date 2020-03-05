@@ -19,7 +19,7 @@
 	},
 	"scripts": {
 		"mock": "cross-env MODE=mock HOST=0.0.0.0 nuxt --config-file ./main/nuxt.config.js",
-		"dev": "cross-env MODE=dev nuxt --config-file ./main/nuxt.config.js",
+		"dev": "cross-env MODE=dev nuxt-ts --config-file ./main/nuxt.config.js",
 		"mock:nologin": "cross-env MODE=mock NO_LOGIN=1 nuxt --config-file ./main/nuxt.config.js",
 		"dev:nologin": "cross-env MODE=dev NO_LOGIN=1 nuxt --config-file ./main/nuxt.config.js",
 		"build": "cross-env MODE=prod nuxt build --config-file ./main/nuxt.config.js",

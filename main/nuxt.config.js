@@ -2,11 +2,11 @@
  * @Description: nuxt 配置文件
  * @Author: barret
  * @Date: 2019-08-10 07:57:24
- * @LastEditTime: 2020-02-19 11:51:03
+ * @LastEditTime: 2020-03-05 15:16:55
  * @LastEditors: Please set LastEditors
  */
 require('dotenv').config();
-const proxyConfig = require('../proxy.config.ts');
+const proxyConfig = require('../proxy.config.js');
 const path = require('path');
 // 添加扩展路由
 const fg = require('fast-glob');
@@ -235,3 +235,7 @@ const nuxtConfig = {
 };
 
 module.exports = nuxtConfig;
+
+
+//[参考](https://www.jianshu.com/p/78268bd9af0a)
+export {};

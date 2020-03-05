@@ -14,9 +14,12 @@
 
 1.tslint是否需要加？
  
-  暂定
+Tslint已经废弃[相关文档](https://www.npmjs.com/package/tslint),已经并入了EsLint
   
-2.vue-property-decorator 与@vue/composition-api 对比？
+
+2.[TsConfig.json参考文件](http://json.schemastore.org/tsconfig)
+
+3.vue-property-decorator 与@vue/composition-api 对比？
 
 
 >区别：
@@ -69,3 +72,11 @@ vue-property-decorator 优点
  解决方法： declare module 'xxx'
 
 2.当引入外部文件时，记得声明文件。以防出现错误
+
+解决方法： declare module 'xxx'
+
+
+
+### 错误文档参考
+
+1.[关于对象字面量的属性检查](https://www.jianshu.com/p/c9c818be48ea)

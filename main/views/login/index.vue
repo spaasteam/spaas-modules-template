@@ -43,101 +43,107 @@
   </div>
 </template>
 
-<script>
-export default {
-  layout: 'login',
-  name: 'login',
-  components: {},
+<script lang="ts">
+import {Vue, Emit, Component} from 'vue-property-decorator';
+
+@Component({
   head() {
     return {
       title: 'sPaaS Console 登录',
     };
   },
-  data() {
-    const validateUserName = (rules, value, callback) => {
-      if (!value) {
-        callback('请输入账号');
-      } else {
-        callback();
-      }
-    };
-    const validatePsw = (rules, value, callback) => {
-      if (!value) {
-        callback('请输入密码');
-      } else {
-        callback();
-      }
-    };
+  naem: 'login',
+  layout: 'login',
+})
+interface //定义接口
+formObj {
+  username: string;
+  password: string;
+  enterpriseId: string;
+}
 
-    return {
-      test: {
-        username: 'guest',
-        password: 'guest1234',
-      },
-      loading: false,
-      form: {
-        username: '',
-        password: '',
-        enterpriseId: '',
-      },
-      rules: {
-        username: [
-          {
-            validator: validateUserName,
-            trigger: 'blur',
-          },
-        ],
-        password: [
-          {
-            validator: validatePsw,
-            required: true,
-            trigger: 'blur',
-          },
-        ],
-        enterpriseId: [
-          {
-            required: true,
-            trigger: 'blur',
-            message: '请输入租户ID',
-          },
-        ],
-      },
-    };
-  },
-  methods: {
-    login() {
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true;
+export default class Login extends Vue {
+  // private loading:boolean = false;
+  private form: formObj = {
+    username: '',
+    password: '',
+    enterpriseId: '',
+  };
 
-          const params = {
-            username: this.form.username,
-            password: this.form.password,
-            channel: 'pc',
-            enterpriseId: this.form.enterpriseId,
-          };
-          this.$store
-            .dispatch('loginByUsername', params)
-            .then(() => {
-              this.loading = false;
-              this.$router.replace('/');
-            })
-            .catch(e => {
-              // TODO 异常处理
-              this.loading = false;
-              console.log(e);
-            });
-        } else {
-          return false;
-        }
-      });
-    },
+  //定义方法
+  validateUserName(rules?: any, value?: any, callback?: any): void {
+    if (!value) {
+      callback('请输入账号');
+    } else {
+      callback();
+    }
+  }
+  validatePsw(rules?: any, value?: any, callback?: any): void {
+    if (!value) {
+      callback('请输入密码');
+    } else {
+      callback();
+    }
+  }
+  rules: any = {
+    username: [
+      {
+        validator: this.validateUserName,
+        trigger: 'blur',
+      },
+    ],
+    password: [
+      {
+        validator: this.validatePsw,
+        required: true,
+        trigger: 'blur',
+      },
+    ],
+    enterpriseId: [
+      {
+        required: true,
+        trigger: 'blur',
+        message: '请输入租户ID',
+      },
+    ],
+  };
+  // 方法
+  @Emit()
+  toSignUp(): void {
+    this.$router.push('/register');
+  }
 
-    toSignUp() {
-      this.$router.push('/register');
-    },
-  },
-};
+  // 参考https://frontendsociety.com/writing-vuex-stores-in-typescript-b570ca34c2a
+  @Emit()
+  login() {
+    console.log(1111);
+    // this.$refs.loginForm.validate(valid => {
+    //   if (valid) {
+    //     this.loading = true;
+
+    //     const params = {
+    //       username: this.form.username,
+    //       password: this.form.password,
+    //       channel: 'pc',
+    //       enterpriseId: this.form.enterpriseId,
+    //     };
+    //     this.$store
+    //       .dispatch('loginByUsername', params)
+    //       .then(() => {
+    //         this.loading = false;
+    //         this.$router.replace('/');
+    //       })
+    //       .catch(e => {
+    //         // TODO 异常处理
+    //         this.loading = false;
+    //         console.log(e);
+    //       });
+    //   } else {
+    //     return false;
+    //   }
+    // });
+  }
+}
 </script>
 
 <style lang="less" scoped>
