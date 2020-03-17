@@ -97,5 +97,8 @@
 			"git add"
 		]
 	},
-	"gitHead": "b95c3ab64ab380d6986dcab35328394fc7b971f6"
+	"gitHead": "b95c3ab64ab380d6986dcab35328394fc7b971f6",
+	"dependencies": {
+		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.2"
+	}
 }

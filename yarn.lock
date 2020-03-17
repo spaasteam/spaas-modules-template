@@ -1957,6 +1957,24 @@ babel-plugin-dynamic-import-node@^2.3.0:
   dependencies:
     object.assign "^4.1.0"
 
+babel-plugin-transform-es2015-modules-commonjs@^6.26.2:
+  version "6.26.2"
+  resolved "https://registry.npm.taobao.org/babel-plugin-transform-es2015-modules-commonjs/download/babel-plugin-transform-es2015-modules-commonjs-6.26.2.tgz#58a793863a9e7ca870bdc5a881117ffac27db6f3"
+  integrity sha1-WKeThjqefKhwvcWogRF/+sJ9tvM=
+  dependencies:
+    babel-plugin-transform-strict-mode "^6.24.1"
+    babel-runtime "^6.26.0"
+    babel-template "^6.26.0"
+    babel-types "^6.26.0"
+
+babel-plugin-transform-strict-mode@^6.24.1:
+  version "6.24.1"
+  resolved "https://registry.npm.taobao.org/babel-plugin-transform-strict-mode/download/babel-plugin-transform-strict-mode-6.24.1.tgz#d5faf7aa578a65bbe591cf5edae04a0c67020758"
+  integrity sha1-1fr3qleKZbvlkc9e2uBKDGcCB1g=
+  dependencies:
+    babel-runtime "^6.22.0"
+    babel-types "^6.24.1"
+
 babel-polyfill@6.26.0:
   version "6.26.0"
   resolved "https://registry.npm.taobao.org/babel-polyfill/download/babel-polyfill-6.26.0.tgz#379937abc67d7895970adc621f284cd966cf2153"
@@ -1974,6 +1992,17 @@ babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.26.0:
     core-js "^2.4.0"
     regenerator-runtime "^0.11.0"
 
+babel-template@^6.26.0:
+  version "6.26.0"
+  resolved "https://registry.npm.taobao.org/babel-template/download/babel-template-6.26.0.tgz#de03e2d16396b069f46dd9fff8521fb1a0e35e02"
+  integrity sha1-3gPi0WOWsGn0bdn/+FIfsaDjXgI=
+  dependencies:
+    babel-runtime "^6.26.0"
+    babel-traverse "^6.26.0"
+    babel-types "^6.26.0"
+    babylon "^6.18.0"
+    lodash "^4.17.4"
+
 babel-traverse@^6.26.0:
   version "6.26.0"
   resolved "https://registry.npm.taobao.org/babel-traverse/download/babel-traverse-6.26.0.tgz#46a9cbd7edcc62c8e5c064e2d2d8d0f4035766ee"
@@ -1989,7 +2018,7 @@ babel-traverse@^6.26.0:
     invariant "^2.2.2"
     lodash "^4.17.4"
 
-babel-types@^6.26.0:
+babel-types@^6.24.1, babel-types@^6.26.0:
   version "6.26.0"
   resolved "https://registry.npm.taobao.org/babel-types/download/babel-types-6.26.0.tgz#a3b073f94ab49eb6fa55cd65227a334380632497"
   integrity sha1-o7Bz+Uq0nrb6Vc1lInozQ4BjJJc=
