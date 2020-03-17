@@ -1,20 +1,16 @@
 <template>
   <div class="index">
-    <img :src="introductionImg" alt="业务中台" />
+    <img :src="introduction" alt="业务中台" />
   </div>
 </template>
 
-<script>
-import introductionImg from './images/introduction.png';
-
-export default {
-  name: 'index',
-  data() {
-    return {
-      introductionImg,
-    };
-  },
-};
+<script lang="ts">
+import {Vue, Component} from 'vue-property-decorator';
+import introduction from './images/introduction.png';
+@Component({})
+export default class Index extends Vue {
+  introduction = introduction;
+}
 </script>
 
 <style lang="less" scoped>

@@ -1,0 +1,38 @@
+{
+      "compilerOptions": {
+        "target": "es2018",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "lib": [
+          "esnext",
+          "esnext.asynciterable",
+          "es5",
+          "es6",
+          "es7",
+          "dom"
+        ],
+        "esModuleInterop": true,
+        "allowJs": true,
+        "sourceMap": true,
+        "strict": true,
+        "noEmit": true,
+        "baseUrl": "./main",
+        "experimentalDecorators":true,
+        "noImplicitAny": false,
+        "paths": {
+          "~/*": [
+            "./*"
+          ],
+        },
+        "types": [
+          "@types/node",
+          "@nuxt/types",
+          "webpack-env",
+          "mocha",
+          "chai"
+        ]
+      },
+      "exclude": [
+        "node_modules"
+      ]
+    }
