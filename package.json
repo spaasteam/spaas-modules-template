@@ -104,6 +104,7 @@
 		"@nuxt/typescript-runtime": "^0.3.9",
 		"@types/node": "^13.7.1",
 		"@types/webpack-env": "^1.15.1",
+		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
 		"ts-loader": "^6.2.1",
 		"ts-node": "^8.6.2",
 		"vue-property-decorator": "^8.4.0",
