@@ -11,6 +11,7 @@
           "es7",
           "dom"
         ],
+        "jsx": "preserve",
         "esModuleInterop": true,
         "allowJs": true,
         "sourceMap": true,
@@ -28,8 +29,6 @@
           "@types/node",
           "@nuxt/types",
           "webpack-env",
-          "mocha",
-          "chai"
         ]
       },
       "exclude": [
