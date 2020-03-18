@@ -14,5 +14,11 @@ module.exports = {
     '/deepexi-cloud': apiServer,
     '/deepexi-domain-staff': apiServer,
     '/asset-service': apiServer,
+    '/petstore': {
+      target: 'https://petstore.swagger.io',
+      pathRewrite: {
+        '^/petstore/': '/v2/'
+      }
+    }
   },
 };

@@ -24,3 +24,5 @@ package-lock.json
 
 # template
 template
+
+.mocks/
