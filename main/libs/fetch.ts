@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import axios from '@/services/apiClient';
+import axios from '~/services/apiClient';
 
 // import { AxiosRequestConfig } from 'axios';
 
@@ -52,5 +52,29 @@ function urlResolve(url: string, paramsObj: {[key: string]: string}) {
     //为什么这么说呢，是根据查看生成的api接口文档查看的
  */
 export function fetch(options) {
-  return axios[options.method](options);
+  console.log(options);
+  // get/post 设置请求头的方式不一样，需要兼容
+  //参考：https://www.cnblogs.com/dudu123/p/10107242.html
+  return axios[options.method](options.url, {
+    params: {
+      ...options.params,
+    },
+    headers: {
+      ...options.headers,
+    },
+  });
 }
+
+/**
+ * @description: 存疑，为什么proxy,重写path不生效？
+ * 直接调用url可以succ
+ */
+/**
+ 
+'/petstore': {
+    target: 'https://petstore.swagger.io',
+    pathRewrite: {
+      '^/petstore/': '/v2/'
+    }
+  }
+ */

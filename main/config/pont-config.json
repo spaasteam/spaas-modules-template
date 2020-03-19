@@ -5,5 +5,9 @@
     "name": "petstore",
     "usingMultipleOrigins": true
   }],
+  "mocks": {
+    "enable": true,
+    "port": 8111
+  },
   "templatePath": "./pont-template-nuxt"
 }
