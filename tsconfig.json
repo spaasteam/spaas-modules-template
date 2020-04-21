@@ -11,28 +11,31 @@
           "es7",
           "dom"
         ],
+        "jsx": "preserve",
         "esModuleInterop": true,
         "allowJs": true,
         "sourceMap": true,
         "strict": true,
         "noEmit": true,
-        "baseUrl": "./main",
+        "baseUrl": ".",
         "experimentalDecorators":true,
         "noImplicitAny": false,
         "paths": {
           "~/*": [
-            "./*"
+            "main/*"
           ],
+          "@/*": [
+            "main/*"
+          ]
         },
         "types": [
           "@types/node",
           "@nuxt/types",
+          "@nuxt/vue-app",
           "webpack-env",
-          "mocha",
-          "chai"
         ]
       },
       "exclude": [
-        "node_modules"
+        "node_modules",
       ]
     }

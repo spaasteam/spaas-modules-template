@@ -2,7 +2,7 @@
  * @Description: nuxt 配置文件
  * @Author: barret
  * @Date: 2019-08-10 07:57:24
- * @LastEditTime: 2020-02-19 11:51:03
+ * @LastEditTime: 2020-03-19 15:08:09
  * @LastEditors: Please set LastEditors
  */
 require('dotenv').config();
@@ -203,6 +203,9 @@ const nuxtConfig = {
     },
   ],
   plugins: [
+    {
+      src: '~/plugins/apiInject'
+    },
     {
       src: '~/plugins/axios-port.js',
     },

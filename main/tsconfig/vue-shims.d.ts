@@ -1,6 +1,9 @@
 //ts识别全局方法/变量
 import VueRouter, {Route} from 'vue-router';
 import Vue from 'vue';
+import {Store} from 'vuex';
+import {Message} from './element-global.d';
+
 declare var document: Document;
 
 declare module '*.vue' {
@@ -22,5 +25,13 @@ declare module 'vue/types/vue' {
   interface Vue {
     $router: VueRouter; // 这表示this下有这个东西
     $route: Route;
+    $store: Store<any>;
+    $message: Message;
   }
 }
+
+/**
+ * 引入部分第三方库/自己编写的模块的时候需要额外声明文件
+ * 引入的时候，需要使用类似 import VueLazyLaod from 'vue-lazyload' 的写法
+ */
+// declare module 'vue-lazyload'
