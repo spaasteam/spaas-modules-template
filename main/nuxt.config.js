@@ -79,7 +79,7 @@ const nuxtConfig = {
     /*
      ** Run ESLint on save
      */
-    extend(config, {isDev, isClient}) {
+    extend(config) {
       config.externals = {
         vue: 'Vue',
         '@femessage/element-ui': 'ELEMENT',
@@ -87,28 +87,38 @@ const nuxtConfig = {
       };
       config.module.rules = config.module.rules.filter(item => !item.test.test('.svg'));
 
-      config.module.rules.push({
-        test: /\.svg$/,
-        loader: 'svg-sprite-loader',
-        include: [resolve('./icons')],
-        options: {
-          symbolId: 'icon-[name]',
-        },
-      });
-
-      config.module.rules.push({
-        test: /\.(png|jpe?g|gif|svg)$/,
-        exclude: [resolve('./icons')],
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10000, // 1K limit
-              name: 'img/[name].[hash:8].[ext]',
-            },
+      config.module.rules.push(
+        {
+          test: /\.svg$/,
+          loader: 'svg-sprite-loader',
+          include: [resolve('./icons')],
+          options: {
+            symbolId: 'icon-[name]',
           },
-        ],
-      });
+        },
+        {
+          test: /\.ts$/,
+          exclude: [/node_modules/, /vendor/, /\.nuxt/],
+          loader: 'ts-loader',
+          options: {
+            appendTsSuffixTo: [/\.vue$/, /TSX\.vue$/],
+            transpileOnly: true,
+          },
+        },
+        {
+          test: /\.(png|jpe?g|gif|svg)$/,
+          exclude: [resolve('./icons')],
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 10000, // 1K limit
+                name: 'img/[name].[hash:8].[ext]',
+              },
+            },
+          ],
+        },
+      );
 
       // Run ESLint on save
       // if (isDev && isClient) {
@@ -219,6 +229,7 @@ const nuxtConfig = {
       },
     ],
   ],
+  buildModules: ['@nuxt/typescript-build'],
   axios,
 };
 
