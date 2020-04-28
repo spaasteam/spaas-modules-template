@@ -6,28 +6,24 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import {Vue, Component, Prop} from 'vue-property-decorator';
 import img404 from './images/404.png';
 
-export default {
-  props: {
-    goIndex: Function,
-  },
-  data() {
-    return {
-      img404,
-    };
-  },
-  methods: {
-    goBackToIndex() {
-      if (this.goIndex) {
-        this.goIndex();
-      } else {
-        this.$router.replace('/');
-      }
-    },
-  },
-};
+@Component
+export default class NotExit extends Vue{
+  @Prop() private goIndex!: Function;
+
+  private img404: string = img404
+
+  private goBackToIndex() {
+    if (this.goIndex) {
+      this.goIndex();
+    } else {
+      this.$router.replace('/');
+    }
+  }
+}
 </script>
 <style lang="less">
 .not-exit-component {

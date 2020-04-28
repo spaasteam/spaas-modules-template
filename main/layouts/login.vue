@@ -17,19 +17,17 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import {Vue, Component} from 'vue-property-decorator';
 import Copyright from '@/components/copyright.vue';
 
-export default {
-  name: 'login',
+@Component({
   components: {
-    Copyright,
-  },
-  data() {
-    return {};
-  },
-  methods: {},
-};
+    Copyright
+  }
+})
+export default class Login extends Vue{}
+
 </script>
 <style lang="less">
 @basic-font-family: PingFangSC-Regular;

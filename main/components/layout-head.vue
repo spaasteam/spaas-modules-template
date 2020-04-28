@@ -43,6 +43,51 @@
 </template>
 
 <script>
+// import {Vue, Component} from 'vue-property-decorator';
+/* @Component
+ export default class LayoutHead extends Vue{
+  interface SearchUrl {
+    url: string
+  }
+  interface Item {
+    url: string
+  }
+
+  @Prop({default: {url: ''}}) searchUrl!: SearchUrl;
+
+  // 计算属性
+  get userName() {
+    return this.$store.state.username || 'sPaaS';
+  }
+  get userImg() {
+    return (
+      this.$store.state.user.avatar ||
+      'https://deepexi.oss-cn-shenzhen.aliyuncs.com/xpaas-console/user-portrait.png'
+    );
+  }
+
+  // 方法
+  exitBtn(key: string): void {
+    if (key === 'exit') {
+      this.$store.commit('logout');
+    }
+  }
+  handleMenu(item: Item): void {
+    const url = item.url;
+    if (url !== this.getCurrentPath()) {
+      const currentOrigin = window.location.origin;
+      window.location.href = `${currentOrigin}${url}`;
+    }
+  },
+  getCurrentPath(): string {
+    const currentPath = window.location.href.split('#/')[0];
+    const currentOrigin = window.location.origin;
+    const path = currentPath.split(currentOrigin)[1] || '';
+    const pathStr = path.replace(/(^\/*)/g, '');
+    return `/${pathStr}`;
+  },
+ }*/
+
 import {appName} from '../../spaas.config';
 import {mapMutations} from 'vuex';
 

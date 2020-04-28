@@ -4,22 +4,20 @@
   </div>
 </template>
 
-<script>
-import MenuItem from './src/menu-item';
+<script lang="ts">
+import {Vue, Component, Prop} from 'vue-property-decorator';
+import MenuItem from './src/menu-item.vue';
 
-export default {
-  name: 'MenuList',
+@Component({
   components: {
     MenuItem,
-  },
-  props: {
-    menuList: {
-      type: Array,
-      default: () => [],
-    },
-  },
-};
+  }
+})
+export default class MenuList extends Vue{
+  @Prop({ default: () => [] }) private menuList!: any[];
+}
 </script>
+
 <style lang="less">
 .menu-list {
   user-select: none;
