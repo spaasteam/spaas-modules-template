@@ -1,13 +1,10 @@
-import axios from '@/services/apiClient';
+import axios from '@/services/apiClient'
 
-const apiVersion = '/api/v1';
-const serviceType = '/asset-service';
-const serviceTenantType = `${serviceType}/tenant`;
-const serviceAdminType = `${serviceType}/admin`;
+const apiVersion = '/api/v1'
+const serviceType = '/asset-service'
+const serviceAdminType = `${serviceType}/admin`
 
-const basicUrl = `${serviceType}${apiVersion}`;
-const tenantUrl = `${serviceTenantType}${apiVersion}`;
-const adminUrl = `${serviceAdminType}${apiVersion}`;
+const adminUrl = `${serviceAdminType}${apiVersion}`
 
 /**
  * @description 获取中心Id
@@ -15,4 +12,4 @@ const adminUrl = `${serviceAdminType}${apiVersion}`;
  * @param {string} tenantId 租户ID
  */
 export const getProductList = params =>
-  axios.$get(`${adminUrl}/spaas/products/subscription`, {params});
+  axios.$get(`${adminUrl}/spaas/products/subscription`, { params })
