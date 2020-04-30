@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Emit} from 'vue-property-decorator';
+import { Vue, Component, Emit } from 'vue-property-decorator'
 
 @Component({})
 export default class AppType extends Vue {
@@ -13,13 +13,13 @@ export default class AppType extends Vue {
     console.log(
       this.$api.petstore.pet.findPetsByStatus
         .request({
-          status: 'sold',
+          status: 'sold'
         })
         .then(res => {
-          console.log(res);
+          console.log(res)
         }),
-      '11',
-    );
+      '11'
+    )
   }
 }
 </script>
