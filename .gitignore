@@ -26,3 +26,5 @@ package-lock.json
 template
 
 .mocks/
+# yarn
+yarn-error.log
