@@ -2,12 +2,27 @@
 
 1.安装所需插件
 
-- npm i -D @nuxt/typescript ts-node @types/node @nuxt/typescript-build @nuxt/types
-- npm install -S  vue-property-decorator 
+- yarn add -D @nuxt/typescript ts-node @types/node @nuxt/typescript-build @nuxt/types @nuxt/typescript-runtime
+- yarn add  vue-property-decorator
 
-2.nuxt.config.js
+2.[ts语法糖](https://github.com/kaorun343/vue-property-decorator)
 
-修改nuxt.config.js文件后缀为 nuxt.config.ts
+3.在 nuxt.config.js 文件中配置 ts 的 loader
+```js
+{
+    test: /\.ts$/,
+    exclude: [/node_modules/, /vendor/, /\.nuxt/],
+    loader: 'ts-loader',
+    options: {
+      appendTsSuffixTo: [/\.vue$/, /TSX\.vue$/],
+      transpileOnly: true,
+    },
+ }
+   ```
+以及添加 **buildModules: ['@nuxt/typescript-build']**
+
+### nuxt已经支持lang="ts/tsx"写法
+
 
 ### 引入ts问题
 
@@ -60,7 +75,7 @@ vue-property-decorator 优点
 综合以上描述,故使用vue-property-decorator
 
 
-### 注意事项：
+### FAQ：
 
 1.typscript中是无法识别非代码资源
  
@@ -69,3 +84,42 @@ vue-property-decorator 优点
  解决方法： declare module 'xxx'
 
 2.当引入外部文件时，记得声明文件。以防出现错误
+
+3.Property 'validate' does not exist on type 'Element | Element[] | Vue | Vue[]'. Property 'valid...
+[参考](https://www.jianshu.com/p/36bd22333a70)
+
+4.Property '$message' does not exist on type 
+参考:
+```js
+this['$message']
+```
+
+5. 当使用lang="tsx"的时候，代码写的没有问题,但是页面没有渲染出来,那么检查下是否写了`@Component({})`
+
+``` js
+<script lang="tsx">
+import { Vue, Component } from 'vue-property-decorator'
+@Component({})
+export default class Test extends Vue {
+  render (h, context) {
+    return (
+      <div>test</div>
+    )
+  }
+}
+</script>
+```
+6.this.$refs写法
+``` js
+1.(this.$ref[xxx] as any)
+2.this.$refs[xx]
+```
+
+
+
+### 参考链接:
+1.https://www.zhihu.com/question/64147199/answer/674547048
+2.https://cloud.tencent.com/developer/article/1561521
+3.https://qiita.com/nrslib/items/be90cc19fa3122266fd7
+4.https://zhuanlan.zhihu.com/p/60952007
+5.http://bk.jzgylm.cn/frontEnd/vue-ts/vue-ts-9.html

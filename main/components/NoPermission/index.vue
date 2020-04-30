@@ -6,28 +6,24 @@
   </div>
 </template>
 
-<script>
-import noLimit from './images/noLimit.png';
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator'
+import noLimit from './images/noLimit.png'
 
-export default {
-  props: {
-    goIndex: Function,
-  },
-  data() {
-    return {
-      noLimit,
-    };
-  },
-  methods: {
-    goBackToIndex() {
-      if (this.goIndex) {
-        this.goIndex();
-      } else {
-        this.$router.replace('/');
-      }
-    },
-  },
-};
+@Component
+export default class NoPermission extends Vue {
+  @Prop() private goIndex!: Function;
+
+  private noLimit: string = noLimit;
+
+  private goBackToIndex() {
+    if (this.goIndex) {
+      this.goIndex()
+    } else {
+      this.$router.replace('/')
+    }
+  }
+}
 </script>
 <style lang="less">
 .no-permission-component {
