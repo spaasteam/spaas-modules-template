@@ -9,7 +9,7 @@ npm-debug.log
 
 # Nuxt build
 .nuxt
-
+.spaas
 # Nuxt generate
 dist
 
@@ -24,3 +24,5 @@ package-lock.json
 
 # template
 template
+
+.mocks/

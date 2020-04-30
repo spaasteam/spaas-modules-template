@@ -19,7 +19,7 @@
 	},
 	"scripts": {
 		"mock": "cross-env MODE=mock HOST=0.0.0.0 nuxt --config-file ./main/nuxt.config.js",
-		"dev": "cross-env MODE=dev nuxt --config-file ./main/nuxt.config.js",
+		"dev": "cross-env MODE=dev nuxt-ts --config-file ./main/nuxt.config.js",
 		"mock:nologin": "cross-env MODE=mock NO_LOGIN=1 nuxt --config-file ./main/nuxt.config.js",
 		"dev:nologin": "cross-env MODE=dev NO_LOGIN=1 nuxt --config-file ./main/nuxt.config.js",
 		"build": "cross-env MODE=prod nuxt build --config-file ./main/nuxt.config.js",
@@ -30,30 +30,41 @@
 		"deploy": "now --npm --public",
 		"stdver": "standard-version -m '[skip ci] chore(release): v%s'",
 		"release": "gren release --override",
-		"fix": "eslint --fix  modules/**/*.js  modules/**/*.vue --quiet",
+		"fix": "eslint --fix  modules/**/*.ts  modules/**/*.vue --quiet",
 		"lint": "lint-staged",
 		"commitmsg": "commitlint -E GIT_PARAMS",
 		"eslint-check": "eslint --print-config . | eslint-config-prettier-check",
 		"commit": "npx git-cz",
-		"build:template": "node ./bin/build-template.js",
+		"build:template": "node ./bin/build-template.ts",
 		"prepack": "npm run build:template"
 	},
 	"dependencies": {
 		"@femessage/el-data-table": "^1.15.1",
 		"@femessage/el-form-renderer": "^1.12.1",
 		"@nuxtjs/axios": "^5.5.4",
+		"@nuxtjs/proxy": "1.2.4",
+		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
 		"clipboard": "^2.0.4",
 		"dayjs": "^1.7.4",
 		"js-cookie": "^2.2.0",
 		"nuxt": "^2.8.1",
 		"path-to-regexp": "^3.0.0",
-		"resize-observer-polyfill": "^1.5.0"
+		"resize-observer-polyfill": "^1.5.0",
+		"vue-property-decorator": "^8.4.0",
+		"vuex-class": "^0.3.2"
 	},
 	"devDependencies": {
+		"@babel/plugin-transform-modules-commonjs": "^7.8.3",
 		"@commitlint/cli": "^8.0.0",
 		"@commitlint/config-conventional": "^8.0.0",
+		"@nuxt/types": "^0.6.2",
+		"@nuxt/typescript": "^2.8.1",
+		"@nuxt/typescript-build": "^0.5.7",
+		"@nuxt/typescript-runtime": "^0.3.9",
 		"@nuxtjs/dotenv": "^1.3.0",
 		"@nuxtjs/style-resources": "^0.1.2",
+		"@types/node": "^13.7.1",
+		"@types/webpack-env": "^1.15.1",
 		"@vue/eslint-config-airbnb": "^4.0.0",
 		"babel-eslint": "^10.0.1",
 		"babel-plugin-component": "^1.1.0",
@@ -71,13 +82,16 @@
 		"less": "^3.9.0",
 		"less-loader": "^4.1.0",
 		"lint-staged": "^8.1.0",
+		"pont-engine": "0.3.14",
 		"prettier": "^1.16.0",
 		"prettier-eslint-cli": "^4.7.1",
 		"standard-version": "^6.0.1",
 		"stylelint": "^9.10.0",
 		"stylelint-config-prettier": "^5.2.0",
 		"stylelint-config-standard": "^18.2.0",
-		"svg-sprite-loader": "^4.1.6"
+		"svg-sprite-loader": "^4.1.6",
+		"ts-loader": "^6.2.1",
+		"ts-node": "^8.6.2"
 	},
 	"husky": {
 		"hooks": {
@@ -87,15 +101,13 @@
 		}
 	},
 	"lint-staged": {
-		"*.js": [
+		"*.ts": [
 			"prettier --write",
-			"eslint --fix modules/**/*.js modules/**/*.vue --quiet",
 			"git add"
 		],
 		"*.vue": [
 			"prettier --write",
 			"stylelint --fix",
-			"eslint --fix modules/**/*.js modules/**/*.vue --quiet",
 			"git add"
 		]
 	}

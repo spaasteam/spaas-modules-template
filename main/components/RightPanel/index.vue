@@ -12,63 +12,61 @@
   </div>
 </template>
 
-<script>
+<script lang="tsx">
+import {Vue, Component, Prop, Emit, Watch} from 'vue-property-decorator';
 import {addClass, removeClass} from '@/utils/utils.js';
 
-export default {
-  name: 'RightPanel',
-  props: {
-    clickNotClose: {
-      default: false,
-      type: Boolean,
-    },
-    buttonTop: {
-      default: 250,
-      type: Number,
-    },
-  },
-  data() {
-    return {
-      show: false,
-    };
-  },
-  watch: {
-    show(value) {
-      if (value && !this.clickNotClose) {
-        this.addEventClick();
-      }
-      if (value) {
-        addClass(document.body, 'showRightPanel');
-      } else {
-        removeClass(document.body, 'showRightPanel');
-      }
-    },
-  },
+export default class RightPanel extends Vue {
+  private show = false;
+
+  @Prop({default: false}) readonly clickNotClose: Boolean;
+
+  @Prop({default: 250}) readonly buttonTop: Number;
+
   mounted() {
     this.insertToBody();
-  },
+  }
+
   beforeDestroy() {
-    const elx = this.$refs.rightPanel;
+    const elx = this.$refs.rightPanel as any;
     elx.remove();
-  },
-  methods: {
-    addEventClick() {
-      window.addEventListener('click', this.closeSidebar);
-    },
-    closeSidebar(evt) {
-      const parent = evt.target.closest('.rightPanel');
-      if (!parent) {
-        this.show = false;
-        window.removeEventListener('click', this.closeSidebar);
-      }
-    },
-    insertToBody() {
-      const elx = this.$refs.rightPanel;
-      const body = document.querySelector('body');
-      body.insertBefore(elx, body.firstChild);
-    },
-  },
-};
+  }
+
+  @Emit()
+  addEventClick() {
+    window.addEventListener('click', this.closeSidebar);
+  }
+
+  @Emit()
+  closeSidebar(evt) {
+    const parent = evt.target.closest('.rightPanel');
+    if (!parent) {
+      this.show = false;
+      window.removeEventListener('click', this.closeSidebar);
+    }
+  }
+
+  @Emit()
+  insertToBody() {
+    const elx = this.$refs.rightPanel as any;
+    const body = document.querySelector('body');
+    body.insertBefore(elx, body.firstChild);
+  }
+
+  @Watch('show')
+  @Emit()
+  // watch事件用on[xxx]Change 写
+  onshowChange(value: string): void {
+    if (value && !this.clickNotClose) {
+      this.addEventClick();
+    }
+    if (value) {
+      addClass(document.body, 'showRightPanel');
+    } else {
+      removeClass(document.body, 'showRightPanel');
+    }
+  }
+}
 </script>
 
 <style>
