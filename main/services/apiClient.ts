@@ -1,15 +1,17 @@
+import { tuple } from '../utils/type'
+
 interface Methods {
-  [key: string]: any
+  [key: string]: (...args: any) => any
 }
 
-let client
+let client: any
 
-export function setClient(newClient) {
+export function setClient<T>(newClient: T): void {
   client = newClient
 }
 
 // Request helpers
-const reqMethods: string[] = [
+const reqMethods = tuple(
   'request',
   'delete',
   'get',
@@ -22,8 +24,7 @@ const reqMethods: string[] = [
   '$put',
   '$delete',
   '$post'
-]
-
+)
 const service: Methods = {}
 
 reqMethods.forEach((method: string) => {

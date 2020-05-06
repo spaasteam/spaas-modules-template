@@ -22,6 +22,7 @@
         "baseUrl": "./main",
         "experimentalDecorators":true,
         "noImplicitAny": false,
+        "noImplicitThis": true,
         "paths": {
           "~/*": [
             "./*"

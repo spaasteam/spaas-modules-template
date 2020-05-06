@@ -115,6 +115,7 @@ export default class Test extends Vue {
 2.this.$refs[xx]
 ```
 
+7. [typescript如何导入JSON文件](https://www.jianshu.com/p/6405e67c53e6)
 
 
 ### 参考链接:

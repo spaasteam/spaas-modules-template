@@ -2,23 +2,22 @@
  * @Description: vuex store
  * @Author: barret
  * @Date: 2019-08-13 17:18:05
- * @LastEditTime: 2020-02-21 17:12:01
+ * @LastEditTime: 2020-05-06 16:45:05
  * @LastEditors: Please set LastEditors
  */
 import cookie from 'js-cookie'
 import cookieKeys from '@/const/cookie-keys'
-
 import { loginByUsername, getMenu, getUserDetail } from '@/services/v1/deepexi-cloud'
 import { getProductList } from '@/services/v1/asset-service'
-
 import meta from '@/const/meta'
+import { Istate, mapObj } from './types'
 
-const cookiePath = process.env.COOKIE_PATH
-const cookieDomain = process.env.COOKIE_DOMAIN
+const cookiePath: string | undefined = process.env.COOKIE_PATH
+const cookieDomain: string | undefined = process.env.COOKIE_DOMAIN
 
-const isObject = value => Object.prototype.toString.call(value) === '[object Object]'
+const isObject = (value): boolean => Object.prototype.toString.call(value) === '[object Object]'
 
-export const state = () => ({
+export const state = (): Istate => ({
   userId: '',
   token: '',
   tenantId: '',
@@ -40,8 +39,8 @@ export const state = () => ({
   }
 })
 
-export const mutations = {
-  login(state, payload) {
+export const mutations: mapObj = {
+  login(state: {}, payload: {}) {
     cookieKeys.forEach(key => {
       state[key] = payload[key]
       cookie.set(key, payload[key], {
@@ -50,7 +49,7 @@ export const mutations = {
       })
     })
   },
-  logout(state) {
+  logout(state: {}) {
     cookieKeys.forEach(key => {
       state[key] = ''
       cookie.remove(key, {
@@ -61,7 +60,7 @@ export const mutations = {
     // 清空state，跳转到login页的逻辑交给路由守卫
     window.location.reload()
   },
-  update(state, payload) {
+  update(state: {}, payload: {}) {
     Object.keys(payload).forEach(k => {
       if (isObject(payload[k])) {
         state[k] = Object.assign(state[k], payload[k])
@@ -72,7 +71,7 @@ export const mutations = {
   }
 }
 
-export const actions = {
+export const actions: mapObj = {
   // 用户名账号登录
   async loginByUsername({ commit }, userInfo) {
     try {

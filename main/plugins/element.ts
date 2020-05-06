@@ -39,6 +39,7 @@ import {
   TabPane,
   BreadcrumbItem,
   Breadcrumb
+  // @ts-ignore
 } from '@femessage/element-ui'
 
 import ElFormRenderer from '@femessage/el-form-renderer'
@@ -80,26 +81,16 @@ Vue.use(Tooltip)
 Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.use(Popover)
-
 Vue.use(BreadcrumbItem)
 Vue.use(Breadcrumb)
-
-// Vue.use(Cascader)
-// Vue.use(Autocomplete)
-
-// steps
-// Vue.use(Steps)
-// Vue.use(Step)
 
 Vue.component('el-form-renderer', ElFormRenderer)
 Vue.component('el-data-table', ElDataTable)
 
 Vue.prototype.$notify = Notification
-Vue.$notify = Notification
-
-Vue.prototype.$msgbox = MessageBox;
-Vue.prototype.$alert = MessageBox.alert;
-Vue.prototype.$confirm = MessageBox.confirm;
-Vue.prototype.$prompt = MessageBox.prompt;
-Vue.prototype.$message = Message;
+Vue.prototype.$msgbox = MessageBox
+Vue.prototype.$alert = MessageBox.alert
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$prompt = MessageBox.prompt
+Vue.prototype.$message = Message
 Vue.config.devtools = true

@@ -8,5 +8,5 @@ const basicUrl = `${serviceType}${apiVersion}`
  * @description 应用中心-应用列表
  */
 // eslint-disable-next-line import/prefer-default-export
-export const appOptions = centerId =>
+export const appOptions = (centerId: string | number) =>
   axios.$get(`${basicUrl}/infos?page=1&size=999&centerId=${centerId}`)

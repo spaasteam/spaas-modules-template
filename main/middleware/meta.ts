@@ -3,6 +3,12 @@
  */
 import META from '@/const/meta'
 
+interface ValueObject {
+  htmlTitle?: string | undefined
+  favicon?: string | undefined
+  href?: string
+}
+
 export default function({ store, app }) {
   // if (process.server) return
 
@@ -11,10 +17,10 @@ export default function({ store, app }) {
       meta: META
     })
 
-    const meta = store.state.meta
-    const head = app.head
-    const headLinks = head.link
-    let link = {
+    const meta: ValueObject = store.state.meta
+    const head: any = app.head
+    const headLinks: any[] = head.link
+    let link: ValueObject = {
       href: ''
     }
 

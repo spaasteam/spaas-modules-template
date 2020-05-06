@@ -16,11 +16,11 @@
  * 其余情况都和普通请求行为一致
  */
 
-import Vue from 'vue';
-import cookie from 'js-cookie';
-import qs from 'qs';
+import Vue from 'vue'
+import cookie from 'js-cookie'
+import qs from 'qs'
 
-import cookieKeys from '@/const/cookie-keys';
+import cookieKeys from '@/const/cookie-keys'
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -37,89 +37,91 @@ const codeMessage = {
   500: '服务器发生错误，请检查服务器。',
   502: '网关错误。',
   503: '服务不可用，服务器暂时过载或维护。',
-  504: '网关超时。',
-};
+  504: '网关超时。'
+}
 
 /**
  * 根据返回的状态码以及错误码来提示用户
  */
 const remindOrExit = (() => {
-  let timer;
+  let timer
   return error => {
-    const resp = error.response;
-    const data = resp.data;
-    const status = resp.status;
-    let message = '';
+    const resp = error.response
+    const data = resp.data
+    const status = resp.status
+    let message = ''
 
     if (status === 401 || status === 403) {
-      const {exp, msg} = data;
+      const { exp, msg } = data
       // exp: 'exceeds maximum allowed expiration';
       // message: "No credentials found for given 'iss'";
       // 如果有exp字段则认为为登录超时
       // 没有权限，执行一次logout，然后重新登录
       if (exp) {
-        message = '登陆超时，请重新登录！';
+        message = '登陆超时，请重新登录！'
       } else {
-        message = '您已通过其他浏览器登录,请退出后再登陆！';
+        message = '您已通过其他浏览器登录,请退出后再登陆！'
       }
       if (!timer) {
+        // @ts-ignore
         Vue.$notify.error({
           title: '提示',
-          message: msg || message,
-        });
+          message: msg || message
+        })
         timer = setTimeout(() => {
           cookieKeys.forEach(key => {
             cookie.remove(key, {
               path: process.env.COOKIE_PATH,
-              domain: process.env.COOKIE_DOMAIN,
-            });
-          });
+              domain: process.env.COOKIE_DOMAIN
+            })
+          })
           // 清空state，跳转到login页的逻辑交给路由守卫
-          window.location.reload();
-        }, 3000);
+          window.location.reload()
+        }, 3000)
       }
     } else {
-      message = data.msg || data.message || '';
+      message = data.msg || data.message || ''
+      // @ts-ignore
       Vue.$notify.error({
         title: data.code || status,
-        message: message || codeMessage[status],
-      });
+        message: message || codeMessage[status]
+      })
     }
-  };
-})();
+  }
+})()
 
-export default function({$axios, store}) {
+export default function({ $axios, store }) {
   $axios.onRequest(config => {
-    let url = config.url;
+    let url = config.url
     // jwt 验证
     if (store.state.token) {
-      config.headers.common.Authorization = `Bearer ${store.state.token}`;
+      config.headers.common.Authorization = `Bearer ${store.state.token}`
     }
 
     const params = {
       tenantId: store.state.tenantId,
       userId: store.state.userId,
       appId: store.state.app.appId,
-      _: new Date().getTime(),
-    };
+      _: new Date().getTime()
+    }
     // 去除空值
     for (const i in params) {
       if (!params[i]) {
-        delete params[i];
+        delete params[i]
       }
     }
 
-    url += url.indexOf('?') > -1 ? '&' : '?';
-    url += qs.stringify(params);
+    url += url.indexOf('?') > -1 ? '&' : '?'
+    url += qs.stringify(params)
 
-    config.url = url;
+    config.url = url
 
-    return config;
-  });
+    return config
+  })
 
   $axios.onResponse(resp => {
-    const {data} = resp,
-      code = parseInt(data.code, 10);
+    const { data } = resp
+    const code = parseInt(data.code, 10)
 
     // 如果code存在且不等于0，则将响应到error中
     if (code !== 0 && !Number.isNaN(code)) {
@@ -128,23 +130,23 @@ export default function({$axios, store}) {
       // eslint-disable-next-line prefer-promise-reject-errors
       return Promise.reject({
         ...resp,
-        response: resp,
-      });
+        response: resp
+      })
     }
     // 不能直接resolve resp.data 因为部分组件是按照axios原本的返回数据结构进行设计的
-    return Promise.resolve(resp);
-  });
+    return Promise.resolve(resp)
+  })
 
   $axios.onError(error => {
     if (process.client) {
       // axios 数据结构
-      remindOrExit(error);
+      remindOrExit(error)
     } else {
       // TODO asyncData 的错误 需要日志监控
-      console.log('error', error);
+      console.log('error', error)
     }
 
     // 将错误信息继续抛出，业务逻辑可以进行后续的操作
-    return Promise.reject(error);
-  });
+    return Promise.reject(error)
+  })
 }

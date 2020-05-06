@@ -1,32 +1,33 @@
-//ts识别全局方法/变量
-import VueRouter, {Route} from 'vue-router';
-import Vue from 'vue';
-import {Store} from 'vuex';
-import {Message} from './element-global.d';
+// ts识别全局方法/变量
+import VueRouter, { Route } from 'vue-router'
+import Vue from 'vue'
+import { Store } from 'vuex'
+import { Message } from './element-global.d'
 
-declare var document: Document;
+// @ts-ignore
+let document: Document
 
 declare module '*.vue' {
-  export default Vue;
+  export default Vue
 }
 declare module '*.ts' {
-  const value: any;
-  export default value;
+  const value: any
+  export default value
 }
 
 declare global {
   interface window {
-    require: any;
+    require: any
   }
 }
 
 // 识别 this.$route
 declare module 'vue/types/vue' {
   interface Vue {
-    $router: VueRouter; // 这表示this下有这个东西
-    $route: Route;
-    $store: Store<any>;
-    $message: Message;
+    $router: VueRouter // 这表示this下有这个东西
+    $route: Route
+    $store: Store<any>
+    $message: Message
   }
 }
 
