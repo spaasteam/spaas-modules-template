@@ -1,14 +1,14 @@
 <template>
-  <el-breadcrumb class="v-breadcrumb" :separator="separator" v-if="$bcm_list.length">
+  <el-breadcrumb class="v-breadcrumb" :separator="separator" v-if="$bcmList.length">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item
         class="v-breadcrumb-item"
-        v-for="(item, index) in $bcm_list"
+        v-for="(item, index) in $bcmList"
         :key="item.title + index"
       >
         <span
           class="link"
-          v-if="item.enable && index !== $bcm_list.length - 1"
+          v-if="item.enable && index !== $bcmList.length - 1"
           :to="{path: item.fullPath || item.path || item.redirectPath}"
           @click="handle2Path(item)"
         >
@@ -37,7 +37,7 @@ import Render from './render'
 })
 export default class extends Vue {
   @Prop({ default: '/' }) separator?: string;
-  @Inject('$bcm_list') '$bcm_list': any[];
+  @Inject('$bcmList') '$bcmList': any[];
 
   handle2Path(data) {
     const { fullPath, path, redirectPath } = data

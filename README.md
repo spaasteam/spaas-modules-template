@@ -2,8 +2,8 @@
  * @Description: 项目说明文档
  * @Author: barret
  * @Date: 2019-07-22 14:04:01
- * @LastEditTime: 2019-08-16 19:39:06
- * @LastEditors: barret
+ * @LastEditTime: 2020-05-07 11:14:41
+ * @LastEditors: Please set LastEditors
  -->
 # spaas-admin-template
 [![Build Status](https://travis-ci.com/levy9527/nuxt-element-dashboard.svg?branch=master)](https://travis-ci.com/levy9527/nuxt-element-dashboard)[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/levy9527/nuxt-element-dashboard/pulls)[![Automated Release Notes by gren](https://img.shields.io/badge/%F0%9F%A4%96-release%20notes-00B2EE.svg)](https://github-tools.github.io/github-release-notes/)
@@ -16,9 +16,11 @@
 - **[工程结构](#工程结构)**
 - **[开发](#开发)**
   - **[新建页面](#新建页面)**
+  - **[TS指南](#TS使用指南)**
   - **[调用接口](#调用接口)**
   - **[CRUD](#CRUD)**
   - **[设置代理](#设置代理)**
+  - **[使用Pont](#使用Pont)**
 - **[环境变量](#环境变量)**
 - **[构建](#构建)**
 - **[License](#license)**
@@ -67,74 +69,126 @@ yarn generate
 
 ## 工程结构
 
+``` 
+spaas-modules-template
+├─ .babelrc
+├─ .editorconfig
+├─ .env
+├─ .eslintignore
+├─ .eslintrc.js
+├─ .gitignore
+├─ .grenrc.js
+├─ .mocks
+│    └─ mocks.ts
+├─ .npmignore
+├─ .npmrc
+├─ .prettierignore
+├─ .prettierrc
+├─ .stylelintrc
+├─ .travis.yml
+├─ CHANGELOG.md
+├─ README.md
+├─ build.sh
+├─ jsconfig.json
+├─ main
+│    ├─ api
+│    │    ├─ api-lock.json
+│    │    ├─ api.d.ts
+│    │    ├─ index.ts
+│    │    └─ petstore
+│    ├─ components                             公用组件
+│    │    ├─ NoPermission                                无权限
+│    │    ├─ NotExist                                     404
+│    │    ├─ RightPanel                                   右侧面板（开发模式专用）
+│    │    ├─ Sticky                                       
+│    │    ├─ SvgIcon                                      SVG
+│    │    ├─ copyright.vue                                公共底部
+│    │    ├─ icon-font.vue                                icon组件
+│    │    ├─ layoutHead                                   公共头部
+│    │    ├─ menu-list                                    菜单栏
+│    │    ├─ route-tab.vue                                路由切换
+│    │    └─ scrollbar                                    滚动条
+│    ├─ config
+│    │    ├─ pont-config.json
+│    │    └─ pont-template-nuxt.ts
+│    ├─ const                                 常量文件夹
+│    │    ├─ config.ts                                    配置静态文件
+│    │    ├─ cookie-keys.ts                               存储的 cookie key 数组
+│    │    ├─ filter.ts                                    日期转换filter
+│    │    ├─ meta.ts                                      meta配置信息
+│    │    ├─ pattern.ts                                   正则校验文件
+│    │    └─ route-info.json                              面包屑配置文件
+│    ├─ icons                                 icon
+│    │    ├─ index.ts
+│    │    ├─ svg
+│    │    └─ svgo.yml
+│    ├─ layouts                               公共模板
+│    │    ├─ default.vue                                  默认模板
+│    │    └─ login.vue                                    登录模板
+│    ├─ libs                                 pont-libs
+│    │    └─ fetch.ts                                     重写fetch
+│    ├─ middleware                            中间件
+│    │    ├─ auth.ts                                      路由鉴权中间件
+│    │    ├─ breadcrubMixin                               面包屑
+│    │    └─ emitter.ts                                   发送/接收组件
+│    ├─ nuxt.config.js                       nuxt入口配置文件
+│    ├─ pages                                nuxt 自动生成路由
+│    │    ├─ _.vue
+│    │    ├─ icons.vue
+│    │    ├─ index.vue
+│    │    ├─ login.vue
+│    │    └─ noPermission.vue
+│    ├─ plugins                              应用插件，在Vue.js 初始化前运行，可在这里引入第三方类库
+│    │    ├─ README.md
+│    │    ├─ apiInject.ts                                 pont注册api文件
+│    │    ├─ axios-port.ts                                全局注册server文件
+│    │    ├─ axios.ts                                     
+│    │    ├─ element.ts                                   引入 element-ui 组件
+│    │    ├─ globalPlugin.ts                              
+│    │    ├─ router.ts                                    修改页面title文件
+│    │    └─ store.ts                                     
+│    ├─ services                             api请求文件夹
+│    │    ├─ README.md
+│    │    ├─ apiClient.ts
+│    │    └─ v1
+│    ├─ static                               静态资源目录
+│    │    ├─ README.md
+│    │    ├─ default_icon.svg
+│    │    └─ favicon.ico
+│    ├─ store                               vuex 状态管理
+│    │    ├─ app.ts
+│    │    ├─ index.ts
+│    │    └─ types.ts
+│    ├─ styles                              样式文件夹
+│    │    ├─ README.md
+│    │    ├─ export.less 
+│    │    ├─ global.less                                全局混入
+│    │    ├─ reset.less                                 样式重置
+│    │    └─ var.less                                   样式变量，支持less变量自动引入，即不用在less中import就能直接使用变量
+│    ├─ types                               声明types
+│    │    ├─ element-global.d.ts
+│    │    ├─ images.d.ts
+│    │    ├─ json.d.ts
+│    │    ├─ less.d.ts
+│    │    ├─ nuxt.d.ts
+│    │    └─ vue-shims.d.ts
+│    ├─ utils                              工具函数库
+│    │    ├─ clipboard.ts
+│    │    ├─ type.ts
+│    │    └─ utils.ts
+│    └─ views                              编写页面代码的地方, 因为pages下创建 `components` 会加载出路由，所以在这里拆分路由方便就近管理原则
+│           ├─ icons
+│           ├─ index
+│           ├─ login
+│           └─ main-layout
+├─ modules                                子应用文件
+├─ package.json
+├─ proxy.config.ts                       上下文js
+├─ spaas.config.js
+├─ ts.md                                 Ts一些FAQ
+├─ tsconfig.json
+└─ yarn.lock
 ```
-src
-├─ components              公用组件
-│    ├─ copyright.vue
-│    ├─ layout-head.vue
-│    ├─ menu-list
-│    │    ├─ src
-│    │    │   └─ menu-item.vue
-│    │    └─ index.vue
-│    ├─ route-tab.vue
-│    ├─ scrollbar
-│    │    ├─ bar.js
-│    │    ├─ index.js
-│    │    ├─ index.less
-│    │    └─ utils
-│    └─ sidebar.vue
-├─ const                    常量文件夹
-│    ├─ api.js          
-│    ├─ cookie-keys.js  存储的 cookie key 数组
-│    ├─ filter.js       公用函数
-│    ├─ meta.js         meta 信息
-│    ├─ path.js
-│    └─ route-info.json 面包屑配置文件
-├─ layouts                  
-│    ├─ default.vue
-│    └─ login.vue
-├─ middleware           自定义函数，会在每个页面渲染前执行
-│    ├─ auth-ssr.js
-│    ├─ auth.js         路由鉴权中间件
-│    └─ meta.js
-├─ mixins               多组件间的公用方法
-│    └─ emitter.js
-├─ pages                nuxt 自动生成路由
-│    ├─ _.vue
-│    ├─ index.vue
-│    └─ login.vue
-├─ plugins              应用插件，在Vue.js 初始化前运行，可在这里引入第三方类库
-│    ├─ README.md
-│    ├─ axios-port.js
-│    ├─ axios.js
-│    └─ element.js      引入了 element-ui 组件
-├─ services             api 请求文件夹
-│    ├─ apiClient.js
-│    └─ v1
-│       └─ spaas-console-api.js
-├─ static               静态资源目录
-│    ├─ README.md
-│    └─ favicon.ico
-├─ store                vuex 状态管理
-│    └─ index.js
-├─ styles               样式文件夹
-│    ├─ README.md
-│    ├─ export.less
-│    ├─ global.less     全局混入
-│    ├─ reset.less      样式重置
-│    └─ var.less        样式变量，支持less变量自动引入，即不用在less中import就能直接使用变量
-├─ utils                工具函数库
-│    └─ utils.js
-└─ views                编写页面代码的地方, 因为pages下创建 `components` 会加载出路由，所以在这里拆分路由方便就近管理原则
-       ├─ index
-       │    └─ index.vue
-       ├─ login
-       │    └─ index.vue
-       └─ main-layout
-              ├─ components
-              └─ index.vue
-```
-
 [⬆ Back to Top](#table-of-contents)
 
 ## 开发
@@ -155,6 +209,36 @@ Nuxt.js 会依据 `pages` 目录中的所有 `*.vue` 文件生成应用的路由
 
 [⬆ Back to Top](#table-of-contents)
 
+### TS使用指南
+
+#### [用法](https://github.com/kaorun343/vue-property-decorator)
+
+#### 例子
+
+``` js
+import { Vue, Component, Watch } from 'vue-property-decorator'
+
+@Component
+export default class YourComponent extends Vue {
+  @Watch('child')
+  onChildChanged(val: string, oldVal: string) {}
+
+  @Watch('person', { immediate: true, deep: true })
+  onPersonChanged1(val: Person, oldVal: Person) {}
+
+  @Watch('person')
+  onPersonChanged2(val: Person, oldVal: Person) {}
+}
+```
+#### 你想写的更飘逸吗？下边demo供你查看
+  1.[blog-vue-typescript](https://github.com/biaochenxuying/blog-vue-typescript)
+
+#### Ts指南
+  1.https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Functions.html
+  2.https://jkchao.github.io/typescript-book-chinese/
+
+[⬆ Back to Top](#table-of-contents)
+
 ### 调用接口
 
 使用`this.$axios` 调用接口：
@@ -162,7 +246,7 @@ Nuxt.js 会依据 `pages` 目录中的所有 `*.vue` 文件生成应用的路由
 - 建议使用`$get $post $[methods]`等方法，respone中会直接返回请求的body
 - 可以在 `*.vue` 文件中的生命周期钩子函数中调用
 - 可以在 `methods` 里调用
-- 可以在 `store/*.js` 的 `actions` 里调用
+- 可以在 `store/*.ts` 的 `actions` 里调用
 
 ```js
 // vue文件
@@ -179,7 +263,7 @@ export default {
 ```
 
 ```js
-// store/index.js
+// store/index.ts
 export const actions = {
   async fetchData({commit}, {params}) {
     let resp = await this.$axios.$get(url, {params})
@@ -269,6 +353,61 @@ env: {
 1. 在 `yarn dev` 模式下，都会变成 `http://real.api.server/api`
 
 **注意，每次修改代理设置，都需要重新启动应用才能生效**
+
+## 使用Pont
+
+[![Pont接入指南](https://s1.ax1x.com/2020/05/07/YZUeCF.png)](https://imgchr.com/i/YZUeCF)
+
+###  使用
+#### 全局安装pont
+  npm i -g pont-engine
+#### VSvode插件
+  Pont
+
+### 本地MOCK
+
+``` js
+export default {
+  '/petstore': {
+    target: "http://127.0.0.1:8111",  //端口为pont-config.json里边的port，其他默认
+    pathRewrite: {
+      '^/petstore/': '/v2/'
+    }
+  }
+};
+```
+
+### 调用
+
+`eg:`
+
+``` js
+<script lang="ts">
+import { Vue, Component, Emit } from 'vue-property-decorator'
+
+@Component({})
+export default class AppType extends Vue {
+  created() {
+    console.log(
+      this.$api.petstore.pet.findPetsByStatus
+        .request({
+          status: 'sold'
+        })
+        .then(res => {
+          console.log(res)
+        }),
+      '11'
+    )
+  }
+}
+</script>
+```
+
+### 接口diff
+
+因Pont是通过api文件里边的接口进行diff接口改动的，所以多人合作时，因避免多次拉取接口，以免造成冲突
+
+### Pont文档（https://github.com/alibaba/pont）
 
 [⬆ Back to Top](#table-of-contents)
 
