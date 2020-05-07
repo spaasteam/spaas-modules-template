@@ -2,7 +2,7 @@
  * @Description: 右侧边栏
  * @Author: barret
  * @Date: 2019-08-05 14:24:09
- * @LastEditTime: 2020-05-07 10:20:52
+ * @LastEditTime: 2020-05-07 11:46:09
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import MenuList from '@/components/menu-list'
+import MenuList from '@/components/menu-list/index.vue'
 import { transformOutsideLink } from '@/utils/utils'
 import Scrollbar from '@/components/scrollbar/index.js'
 
