@@ -18,7 +18,7 @@ const INDEX_PATH = '/'
 const ICONS_PATH = '/icons'
 
 // 路由白名单，直接绕过路由守卫
-const whiteList = [LOGIN_PATH, '/icons']
+const whiteList: string[] = [LOGIN_PATH, '/icons']
 
 export default async({ store, redirect, env, route }) => {
   if (process.server) return

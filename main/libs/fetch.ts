@@ -8,12 +8,6 @@ import { AxiosRequestConfig } from 'axios'
 // // 删除 'url' | 'data' | 'method' | 'params'，返回其它
 export type RequestConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method' | 'params'>;
 
-// let axiosInstance: Nuxt.AxiosInstance;
-
-// export function setAxiosInstance(instance: Nuxt.AxiosInstance) {
-//   axiosInstance = instance;
-// }
-
 function urlResolve(url: string, paramsObj: {[key: string]: string}) {
   if (!paramsObj || !url.includes('{')) return url
 
@@ -26,16 +20,6 @@ function urlResolve(url: string, paramsObj: {[key: string]: string}) {
   })
   return urlArray.join('/')
 }
-
-// export function fetch(options) {
-//   assert.ok(axiosInstance, 'you must call setAxiosInstance to set axiosInstance');
-//   // replace url params like /{foo}/{bar}
-//   options.url = urlResolve(options.url as string, options.params);
-
-//   // console.log('[fetch] ==> $s', options.url);
-//   return axiosInstance.$request(options);
-
-// }
 
 /**
  * @description: 重写mock请求方法
@@ -64,17 +48,3 @@ export function fetch(options) {
     }
   })
 }
-
-/**
- * @description: 存疑，为什么proxy,重写path不生效？
- * 直接调用url可以succ
- */
-/**
-
-'/petstore': {
-    target: 'https://petstore.swagger.io',
-    pathRewrite: {
-      '^/petstore/': '/v2/'
-    }
-  }
- */

@@ -1,12 +1,12 @@
-function broadcast(componentName, eventName, params) {
+function broadcast(this: any, componentName: string, eventName: string, params: any) {
   this.$children.forEach(child => {
-    const name = child.$options.componentName;
+    const name = child.$options.componentName
     if (name === componentName) {
-      child.$emit(...[eventName].concat(params));
+      child.$emit(...[eventName].concat(params))
     } else {
-      broadcast.apply(child, [componentName, eventName].concat([params]));
+      broadcast.call(child, componentName, eventName, params)
     }
-  });
+  })
 }
 
 export default {
@@ -17,18 +17,18 @@ export default {
      * @param {eventName} 事件名
      * @param {params}   传入 参数
      */
-    dispatch(componentName, eventName, params) {
-      let parent = this.$parent || this.$root;
-      let name = parent.$options.componentName;
+    dispatch(this: any, componentName: string, eventName: string, params: any) {
+      let parent = this.$parent || this.$root
+      let name = parent.$options.componentName
       while (parent && (!name || name !== componentName)) {
-        parent = parent.$parent;
+        parent = parent.$parent
 
         if (parent) {
-          name = parent.$options.componentName;
+          name = parent.$options.componentName
         }
       }
       if (parent) {
-        parent.$emit(...[eventName].concat(params));
+        parent.$emit(...[eventName].concat(params))
       }
     },
     /**
@@ -38,7 +38,7 @@ export default {
      * @param {params}   传入 参数
      */
     broadcast(componentName, eventName, params) {
-      broadcast.call(this, componentName, eventName, params);
-    },
-  },
-};
+      broadcast.call(this, componentName, eventName, params)
+    }
+  }
+}

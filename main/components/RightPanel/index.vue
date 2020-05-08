@@ -62,62 +62,6 @@ export default class RightPanel extends Vue {
     body && body.insertBefore(elx, body.firstChild)
   }
 }
-// import {addClass, removeClass} from '@/utils/utils.js';
-
-// export default {
-//   name: 'RightPanel',
-//   props: {
-//     clickNotClose: {
-//       default: false,
-//       type: Boolean,
-//     },
-//     buttonTop: {
-//       default: 250,
-//       type: Number,
-//     },
-//   },
-//   data() {
-//     return {
-//       show: false,
-//     };
-//   },
-//   watch: {
-//     show(value) {
-//       if (value && !this.clickNotClose) {
-//         this.addEventClick();
-//       }
-//       if (value) {
-//         addClass(document.body, 'showRightPanel');
-//       } else {
-//         removeClass(document.body, 'showRightPanel');
-//       }
-//     },
-//   },
-//   mounted() {
-//     this.insertToBody();
-//   },
-//   beforeDestroy() {
-//     const elx = this.$refs.rightPanel;
-//     elx.remove();
-//   },
-//   methods: {
-//     addEventClick() {
-//       window.addEventListener('click', this.closeSidebar);
-//     },
-//     closeSidebar(evt) {
-//       const parent = evt.target.closest('.rightPanel');
-//       if (!parent) {
-//         this.show = false;
-//         window.removeEventListener('click', this.closeSidebar);
-//       }
-//     },
-//     insertToBody() {
-//       const elx = this.$refs.rightPanel;
-//       const body = document.querySelector('body');
-//       body.insertBefore(elx, body.firstChild);
-//     },
-//   },
-// };
 </script>
 
 <style>
