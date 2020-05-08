@@ -61,7 +61,8 @@ export default async({ store, redirect, env, route }) => {
       await store.dispatch('getUserInfo')
       const ifHasPromise = await store.dispatch('fetchAppId')
       if (!ifHasPromise) {
-        Vue.prototype.$notify.error({
+        Vue.prototype.$notify({
+          type: 'error',
           title: '暂无权限',
           message: '请联系管理员开通权限',
           duration: 3000,
