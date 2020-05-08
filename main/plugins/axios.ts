@@ -63,8 +63,8 @@ const remindOrExit = (() => {
         message = '您已通过其他浏览器登录,请退出后再登陆！'
       }
       if (!timer) {
-        // @ts-ignore
-        Vue.$notify.error({
+        Vue.prototype.$notify({
+          type: 'error',
           title: '提示',
           message: msg || message
         })
@@ -81,8 +81,8 @@ const remindOrExit = (() => {
       }
     } else {
       message = data.msg || data.message || ''
-      // @ts-ignore
-      Vue.$notify.error({
+      Vue.prototype.$notify({
+        type: 'error',
         title: data.code || status,
         message: message || codeMessage[status]
       })

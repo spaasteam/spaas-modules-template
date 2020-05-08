@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 import { appOptions } from '@/services/v1/spaas-application-center'
 
 export const state = () => ({
@@ -25,7 +23,7 @@ export const actions = {
     const { centerId } = rootState.permission
 
     // 获取url的appId值
-    let { appId } = Vue.prototype.$router.currentRoute.query
+    let { appId } = (this as any).$router.currentRoute.query
     appId = appId && Number(appId)
 
     try {
