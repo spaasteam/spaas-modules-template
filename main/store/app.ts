@@ -21,12 +21,11 @@ export const mutations = {
 }
 
 export const actions = {
-  async getAppList({ state, commit, rootState }) {
+  async getAppList(this: any, { state, commit, rootState }) {
     const { centerId } = rootState.permission
 
     // 获取url的appId值
-    let { appId } = Vue.prototype.$router.currentRoute.query
-    appId = appId && Number(appId)
+    const { appId } = this.$router.currentRoute.query
 
     try {
       const resp = await appOptions(centerId)
@@ -38,7 +37,7 @@ export const actions = {
           }
         })
         // 获取appId直接赋值
-        const curAppId = appId || (options[0] && options[0].value)
+        const curAppId = (appId && Number(appId)) || (options[0] && options[0].value)
 
         // 设置当前 app
         if (curAppId) {
