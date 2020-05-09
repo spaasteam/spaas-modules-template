@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 import { appOptions } from '@/services/v1/spaas-application-center'
 
 export const state = () => ({
