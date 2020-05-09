@@ -2,7 +2,7 @@
  * @Description: 项目说明文档
  * @Author: barret
  * @Date: 2019-07-22 14:04:01
- * @LastEditTime: 2020-05-07 11:14:41
+ * @LastEditTime: 2020-05-09 16:11:49
  * @LastEditors: Please set LastEditors
  -->
 # spaas-admin-template
@@ -377,6 +377,9 @@ export default {
 };
 ```
 
+
+
+
 ### 调用
 
 `eg:`
@@ -408,6 +411,10 @@ export default class AppType extends Vue {
 因Pont是通过api文件里边的接口进行diff接口改动的，所以多人合作时，因避免多次拉取接口，以免造成冲突
 
 ### Pont文档（https://github.com/alibaba/pont）
+
+
+### [详细教程请异步](https://deepexi.yuque.com/spaas/flnw3h/qlsfst)
+
 
 [⬆ Back to Top](#table-of-contents)
 

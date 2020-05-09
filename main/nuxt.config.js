@@ -2,7 +2,7 @@
  * @Description: nuxt 配置文件
  * @Author: barret
  * @Date: 2019-08-10 07:57:24
- * @LastEditTime: 2020-05-06 19:39:04
+ * @LastEditTime: 2020-05-09 15:18:32
  * @LastEditors: Please set LastEditors
  */
 require('dotenv').config()
@@ -174,7 +174,7 @@ const nuxtConfig = {
     script: [
       {
         type: 'text/javascript',
-        src: '//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js'
+        src: isProd ? '//cdn.jsdelivr.net/npm/vue@2.6.10' : '//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js'
       },
       {
         type: 'text/javascript',

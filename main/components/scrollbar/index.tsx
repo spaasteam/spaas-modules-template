@@ -17,10 +17,10 @@ import './index.less';
 export default class Scrollbar extends Vue {
   @Prop({default: false}) horizontal?: boolean
   @Prop({default: true}) vertical?: boolean
-  @Prop({default: {}}) wrapStyle?: object | string
-  @Prop({default: {}}) wrapClass?: object
-  @Prop({default: {}}) viewClass?: object
-  @Prop({default: {}}) viewStyle?: object
+  @Prop({default: ''}) wrapStyle?: object | string
+  @Prop({default: '' }) wrapClass?: object | string
+  @Prop({default: '' }) viewClass?: object | string
+  @Prop({default: '' }) viewStyle?: object | string
   @Prop({default: true}) noresize?: boolean
 
   sizeWidth = '0'
