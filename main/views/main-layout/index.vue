@@ -2,8 +2,8 @@
  * @Description: main layout 布局
  * @Author: barret
  * @Date: 2019-08-05 14:24:09
- * @LastEditTime: 2019-08-16 15:29:11
- * @LastEditors: barret
+ * @LastEditTime: 2020-05-15 11:24:53
+ * @LastEditors: Please set LastEditors
  -->
 <template>
   <el-container direction="vertical">
@@ -14,8 +14,8 @@
       <Sidebar />
       <el-container class="main-container" direction="vertical">
         <!-- 页面 header -->
-        <VBreadcrumb v-if="hasHeader" class="nuxt-header main-breadcurmb"></VBreadcrumb>
-        <AppOptions v-if="hasAppOptions" @changeShowStatus="changeShowStatus"></AppOptions>
+        <VBreadcrumb v-if="hasHeader" class="nuxt-header main-breadcurmb" />
+        <AppOptions v-if="hasAppOptions" @changeShowStatus="changeShowStatus" />
         <el-main class="nuxt-main">
           <div
             :class="{
@@ -25,9 +25,9 @@
               'min-height': hasHeader && hasAppOptions
             }"
           >
-            <nuxt></nuxt>
+            <nuxt />
             <el-footer class="footer-container" height="40px">
-              <Copyright></Copyright>
+              <Copyright />
             </el-footer>
           </div>
         </el-main>
@@ -38,20 +38,20 @@
   </el-container>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 import { mapState } from 'vuex'
 import Copyright from '@/components/copyright.vue'
-import LayoutHead from '@/components/layoutHead/index'
-
-import VBreadcrumb from './components/breadcrumb'
-import AppOptions from './components/app-options'
+import LayoutHead from '@/components/layoutHead/index.vue'
+import VBreadcrumb from './components/breadcrumb/index.vue'
+import AppOptions from './components/app-options/index.vue'
 import Sidebar from './components/sidebar.vue'
 import CopyModule from './components/copy-module/index.vue'
-
 import breadCrumbMixin from '@/mixins/breadcrubMixin'
 import { hasSelectApp } from '../../../spaas.config'
 
-export default {
+// @ts-ignore
+@Component({
   components: {
     Copyright,
     LayoutHead,
@@ -59,46 +59,40 @@ export default {
     VBreadcrumb,
     AppOptions,
     CopyModule
-  },
-  mixins: [breadCrumbMixin],
-  props: {
-    ifNotProduction: {
-      type: Boolean,
-      default: process.env.NODE_ENV !== 'production'
-    }
-  },
-  data() {
+  }
+})
+export default class Layout extends Mixins(breadCrumbMixin as any) {
+  // @ts-ignore
+  @Prop({ default: process.env.NODE_ENV !== 'production' }) readonly ifNotProduction!: boolean;
+
+  created(this: any) {
     const { path, name } = this.$route
-    return {
-      ifShowCopyModule: process.env.COPY_MODULE,
-      showAppOptions: true,
-      hasHeader: path !== '/' && name !== 'all',
-      hasAppOptions: hasSelectApp && path !== '/'
-    }
-  },
-  computed: {
-    ...mapState(['permission', 'setting']),
-    appName() {
-      return this.permission.spaName
-    }
-  },
-  watch: {
-    $route: {
-      handler() {
-        const { path, name } = this.$route
-        this.hasHeader = path !== '/' && name !== 'all'
-        this.showAppOptions = true
-        this.$nextTick(() => {
-          this.hasAppOptions = hasSelectApp && path !== '/' && this.showAppOptions
-        })
-      },
-      immediate: true
-    }
-  },
-  methods: {
-    changeShowStatus(ifShow) {
-      this.showAppOptions = ifShow
-    }
+    this.ifShowCopyModule = process.env.COPY_MODULE
+    this.showAppOptions = true
+    this.hasHeader = path !== '/' && name !== 'all'
+    this.hasAppOptions = hasSelectApp && path !== '/'
+  }
+
+  ifShowCopyModule: any = null;
+  showAppOptions = false;
+  hasHeader: any = null;
+  hasAppOptions: any = null;
+
+  // @ts-ignore
+  @Watch('$route', {
+    immediate: true
+  })
+  onRouteChanged(this: any) {
+    const { path, name } = this.$route
+    this.hasHeader = path !== '/' && name !== 'all'
+    this.showAppOptions = true
+    this.$nextTick(() => {
+      this.hasAppOptions = hasSelectApp && path !== '/' && this.showAppOptions
+    })
+  }
+
+  changeShowStatus(ifShow) {
+    this.showAppOptions = ifShow
   }
 }
 </script>
@@ -138,10 +132,11 @@ export default {
 
   .nuxt-content {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 20px;
+    left: 20px;
+    right: 20px;
     margin-bottom: 40px;
+    background: #fff;
     padding: 20px 20px 10px;
   }
 
@@ -153,13 +148,13 @@ export default {
   }
 
   .medium-height {
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 140px);
   }
   .small-height {
-    min-height: calc(100vh - 150px);
+    min-height: calc(100vh - 190px);
   }
   .min-height {
-    min-height: calc(100vh - 190px);
+    min-height: calc(100vh - 240px);
   }
 }
 </style>
