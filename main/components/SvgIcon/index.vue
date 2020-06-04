@@ -3,10 +3,10 @@
     <div
       v-if="isExternal && iconClass"
       :style="styleExternalIcon"
-      class="svg-external-icon svg-icon"
       v-on="$listeners"
+      class="svg-external-icon svg-icon"
     />
-    <svg v-else :class="svgClass" aria-hidden="true" v-on="$listeners">
+    <svg v-else :class="svgClass" v-on="$listeners" aria-hidden="true">
       <use :xlink:href="iconName" />
     </svg>
   </div>
@@ -65,6 +65,7 @@ export default class SvgIcon extends Vue {
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+  line-height: 0;
 }
 
 .svg-external-icon {

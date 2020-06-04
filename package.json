@@ -35,6 +35,7 @@
 		"eslint-check": "eslint --print-config . | eslint-config-prettier-check",
 		"commit": "npx git-cz",
 		"build:template": "node ./bin/build-template.ts",
+		"analyze": "cross-env  nuxt-ts build  --config-file  ./main/nuxt.config.js --analyze",
 		"prepack": "npm run build:template"
 	},
 	"dependencies": {

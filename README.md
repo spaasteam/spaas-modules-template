@@ -2,7 +2,7 @@
  * @Description: 项目说明文档
  * @Author: barret
  * @Date: 2019-07-22 14:04:01
- * @LastEditTime: 2020-05-09 16:11:49
+ * @LastEditTime: 2020-05-15 11:26:48
  * @LastEditors: Please set LastEditors
  -->
 # spaas-admin-template
@@ -184,7 +184,7 @@ spaas-modules-template
 ├─ modules                                子应用文件
 ├─ package.json
 ├─ proxy.config.ts                       上下文js
-├─ spaas.config.js
+├─ spaas.config.ts
 ├─ ts.md                                 Ts一些FAQ
 ├─ tsconfig.json
 └─ yarn.lock

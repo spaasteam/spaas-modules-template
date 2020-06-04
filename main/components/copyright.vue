@@ -19,6 +19,6 @@ export default class extends Vue {}
   color: rgba(0, 0, 0, 0.45);
   font-size: 12px;
   text-align: center;
-  line-height: 40px;
+  line-height: 60px;
 }
 </style>

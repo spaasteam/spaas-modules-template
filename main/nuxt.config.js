@@ -2,7 +2,7 @@
  * @Description: nuxt 配置文件
  * @Author: barret
  * @Date: 2019-08-10 07:57:24
- * @LastEditTime: 2020-05-09 15:18:32
+ * @LastEditTime: 2020-05-09 16:45:55
  * @LastEditors: Please set LastEditors
  */
 require('dotenv').config()
@@ -28,7 +28,6 @@ const filePath = fg.sync(resolve('../modules/**/router.ts'), {
   deep: 2,
   onlyFiles: true
 })
-
 const routes = filePath.reduce((pre, cur) => {
   const file = require(cur).default
   return pre.concat(file)
@@ -76,6 +75,7 @@ const nuxtConfig = {
   build: {
     [isProd ? 'publicPath' : '']: publicPath,
     extractCSS: true,
+    analyze: true, //打包性能分析
     /*
      ** Run ESLint on save
      */
@@ -86,7 +86,6 @@ const nuxtConfig = {
         'element-ui': 'ELEMENT'
       }
       config.module.rules = config.module.rules.filter(item => !item.test.test('.svg'))
-
       config.module.rules.push(
         {
           test: /\.svg$/,
