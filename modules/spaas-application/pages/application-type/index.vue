@@ -1,10 +1,4 @@
-<template>
-  <div class="page">
-    测试pont
-  </div>
-</template>
-
-<script lang="ts">
+<script lang="tsx">
 import { Vue, Component, Emit } from 'vue-property-decorator'
 
 @Component({})
@@ -20,6 +14,10 @@ export default class AppType extends Vue {
         }),
       '11'
     )
+  }
+
+  render() {
+    return <div>22</div>
   }
 }
 </script>
